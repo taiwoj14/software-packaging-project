@@ -1,0 +1,14 @@
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m---------< [0;36mcom.softwarepackaging:software-packaging-java-app[0;1m >----------[m
+[[1;34mINFO[m] [1mBuilding software-packaging-java-app 1.0.0[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-dependency-plugin:2.8:tree[m [1m(default-cli)[m @ [36msoftware-packaging-java-app[0;1m ---[m
+[[1;34mINFO[m] com.softwarepackaging:software-packaging-java-app:jar:1.0.0
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  0.720 s
+[[1;34mINFO[m] Finished at: 2026-09-23T10:42:37-04:00
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m

@@ -1,0 +1,14 @@
+node_modules/
+*.log
+.env
+__pycache__/
+*.pyc
+.venv/
+target/
+dist/
+build/
+node-staging/
+python-staging/
+java-staging/
+*.sqlite3
+*.egg-info/

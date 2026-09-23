@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "software-packaging-django-app"
+version = "1.0.0"
+description = "Django application demonstrating software packaging and dependency management"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "Django==6.1.1"
+]
+
+[tool.setuptools.packages.find]
+include = ["config*", "packaging_app*"]
+

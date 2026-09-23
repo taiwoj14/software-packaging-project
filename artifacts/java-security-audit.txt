@@ -1,0 +1,96 @@
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m---------< [0;36mcom.softwarepackaging:software-packaging-java-app[0;1m >----------[m
+[[1;34mINFO[m] [1mBuilding software-packaging-java-app 1.0.0[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mdependency-check-maven:13.0.0:check[m [1m(default-cli)[m @ [36msoftware-packaging-java-app[0;1m ---[m
+[[1;34mINFO[m] Checking for updates
+[[1;31mERROR[m] Error updating the NVD Data
+[1;31morg.owasp.dependencycheck.data.update.exception.UpdateException[m: [1;31mError updating the NVD Data[m
+    [1mat[m org.owasp.dependencycheck.data.update.NvdApiDataSource.processApi ([1mNvdApiDataSource.java:387[m)
+    [1mat[m org.owasp.dependencycheck.data.update.NvdApiDataSource.update ([1mNvdApiDataSource.java:128[m)
+    [1mat[m org.owasp.dependencycheck.Engine.doUpdates ([1mEngine.java:873[m)
+    [1mat[m org.owasp.dependencycheck.Engine.initializeAndUpdateDatabase ([1mEngine.java:678[m)
+    [1mat[m org.owasp.dependencycheck.Engine.analyzeDependencies ([1mEngine.java:605[m)
+    [1mat[m org.owasp.dependencycheck.maven.BaseDependencyCheckMojo.runCheck ([1mBaseDependencyCheckMojo.java:2072[m)
+    [1mat[m org.owasp.dependencycheck.maven.BaseDependencyCheckMojo.execute ([1mBaseDependencyCheckMojo.java:1272[m)
+    [1mat[m org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo ([1mDefaultBuildPluginManager.java:137[m)
+    [1mat[m org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 ([1mMojoExecutor.java:370[m)
+    [1mat[m org.apache.maven.lifecycle.internal.MojoExecutor.doExecute ([1mMojoExecutor.java:351[m)
+    [1mat[m org.apache.maven.lifecycle.internal.MojoExecutor.execute ([1mMojoExecutor.java:215[m)
+    [1mat[m org.apache.maven.lifecycle.internal.MojoExecutor.execute ([1mMojoExecutor.java:171[m)
+    [1mat[m org.apache.maven.lifecycle.internal.MojoExecutor.execute ([1mMojoExecutor.java:163[m)
+    [1mat[m org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject ([1mLifecycleModuleBuilder.java:117[m)
+    [1mat[m org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject ([1mLifecycleModuleBuilder.java:81[m)
+    [1mat[m org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build ([1mSingleThreadedBuilder.java:56[m)
+    [1mat[m org.apache.maven.lifecycle.internal.LifecycleStarter.execute ([1mLifecycleStarter.java:128[m)
+    [1mat[m org.apache.maven.DefaultMaven.doExecute ([1mDefaultMaven.java:298[m)
+    [1mat[m org.apache.maven.DefaultMaven.doExecute ([1mDefaultMaven.java:192[m)
+    [1mat[m org.apache.maven.DefaultMaven.execute ([1mDefaultMaven.java:105[m)
+    [1mat[m org.apache.maven.cli.MavenCli.execute ([1mMavenCli.java:960[m)
+    [1mat[m org.apache.maven.cli.MavenCli.doMain ([1mMavenCli.java:293[m)
+    [1mat[m org.apache.maven.cli.MavenCli.main ([1mMavenCli.java:196[m)
+    [1mat[m jdk.internal.reflect.DirectMethodHandleAccessor.invoke ([1mDirectMethodHandleAccessor.java:103[m)
+    [1mat[m java.lang.reflect.Method.invoke ([1mMethod.java:580[m)
+    [1mat[m org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced ([1mLauncher.java:283[m)
+    [1mat[m org.codehaus.plexus.classworlds.launcher.Launcher.launch ([1mLauncher.java:226[m)
+    [1mat[m org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode ([1mLauncher.java:407[m)
+    [1mat[m org.codehaus.plexus.classworlds.launcher.Launcher.main ([1mLauncher.java:348[m)
+[1mCaused by[m: io.github.jeremylong.openvulnerability.client.nvd.NvdApiException: [1;31mInvalid API Key, length of 0 too short to provided a masked partial key[m
+    [1mat[m io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient._next ([1mNvdCveClient.java:436[m)
+    [1mat[m io.github.jeremylong.openvulnerability.client.nvd.NvdCveClient.next ([1mNvdCveClient.java:356[m)
+    [1mat[m org.owasp.dependencycheck.data.update.NvdApiDataSource.processApi ([1mNvdApiDataSource.java:343[m)
+    [1mat[m org.owasp.dependencycheck.data.update.NvdApiDataSource.update ([1mNvdApiDataSource.java:128[m)
+    [1mat[m org.owasp.dependencycheck.Engine.doUpdates ([1mEngine.java:873[m)
+    [1mat[m org.owasp.dependencycheck.Engine.initializeAndUpdateDatabase ([1mEngine.java:678[m)
+    [1mat[m org.owasp.dependencycheck.Engine.analyzeDependencies ([1mEngine.java:605[m)
+    [1mat[m org.owasp.dependencycheck.maven.BaseDependencyCheckMojo.runCheck ([1mBaseDependencyCheckMojo.java:2072[m)
+    [1mat[m org.owasp.dependencycheck.maven.BaseDependencyCheckMojo.execute ([1mBaseDependencyCheckMojo.java:1272[m)
+    [1mat[m org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo ([1mDefaultBuildPluginManager.java:137[m)
+    [1mat[m org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 ([1mMojoExecutor.java:370[m)
+    [1mat[m org.apache.maven.lifecycle.internal.MojoExecutor.doExecute ([1mMojoExecutor.java:351[m)
+    [1mat[m org.apache.maven.lifecycle.internal.MojoExecutor.execute ([1mMojoExecutor.java:215[m)
+    [1mat[m org.apache.maven.lifecycle.internal.MojoExecutor.execute ([1mMojoExecutor.java:171[m)
+    [1mat[m org.apache.maven.lifecycle.internal.MojoExecutor.execute ([1mMojoExecutor.java:163[m)
+    [1mat[m org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject ([1mLifecycleModuleBuilder.java:117[m)
+    [1mat[m org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject ([1mLifecycleModuleBuilder.java:81[m)
+    [1mat[m org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build ([1mSingleThreadedBuilder.java:56[m)
+    [1mat[m org.apache.maven.lifecycle.internal.LifecycleStarter.execute ([1mLifecycleStarter.java:128[m)
+    [1mat[m org.apache.maven.DefaultMaven.doExecute ([1mDefaultMaven.java:298[m)
+    [1mat[m org.apache.maven.DefaultMaven.doExecute ([1mDefaultMaven.java:192[m)
+    [1mat[m org.apache.maven.DefaultMaven.execute ([1mDefaultMaven.java:105[m)
+    [1mat[m org.apache.maven.cli.MavenCli.execute ([1mMavenCli.java:960[m)
+    [1mat[m org.apache.maven.cli.MavenCli.doMain ([1mMavenCli.java:293[m)
+    [1mat[m org.apache.maven.cli.MavenCli.main ([1mMavenCli.java:196[m)
+    [1mat[m jdk.internal.reflect.DirectMethodHandleAccessor.invoke ([1mDirectMethodHandleAccessor.java:103[m)
+    [1mat[m java.lang.reflect.Method.invoke ([1mMethod.java:580[m)
+    [1mat[m org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced ([1mLauncher.java:283[m)
+    [1mat[m org.codehaus.plexus.classworlds.launcher.Launcher.launch ([1mLauncher.java:226[m)
+    [1mat[m org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode ([1mLauncher.java:407[m)
+    [1mat[m org.codehaus.plexus.classworlds.launcher.Launcher.main ([1mLauncher.java:348[m)
+[[1;34mINFO[m] Should skip RetireJSDataSource update since last update was within period PT24H.
+[[1;34mINFO[m] Should skip HostedSuppressionsDataSource update since last update was within period PT2H.
+[[1;34mINFO[m] Updating CISA Known Exploited Vulnerability list: https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
+[[1;34mINFO[m] Begin database defrag
+[[1;34mINFO[m] End database defrag (70 ms)
+[[1;34mINFO[m] Check for updates complete (1255 ms)
+[[1;33mWARNING[m] Unable to update 1 or more Cached Web DataSource, using local data instead. Results may not include recent vulnerabilities.
+[[1;31mERROR[m] Unable to continue dependency-check analysis.
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;31mBUILD FAILURE[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  2.426 s
+[[1;34mINFO[m] Finished at: 2026-09-23T10:47:48-04:00
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;31mERROR[m] Failed to execute goal [32morg.owasp:dependency-check-maven:13.0.0:check[m [1m(default-cli)[m on project [36msoftware-packaging-java-app[m: [1;31mFatal exception(s) analyzing software-packaging-java-app[m: One or more exceptions occurred during analysis:
+[[1;31mERROR[m] 	UpdateException: Error updating the NVD Data
+[[1;31mERROR[m] 		caused by NvdApiException: Invalid API Key, length of 0 too short to provided a masked partial key
+[[1;31mERROR[m] 	NoDataException: No documents exist
+[[1;31mERROR[m] -> [1m[Help 1][m
+[[1;31mERROR[m] 
+[[1;31mERROR[m] To see the full stack trace of the errors, re-run Maven with the [1m-e[m switch.
+[[1;31mERROR[m] Re-run Maven using the [1m-X[m switch to enable full debug logging.
+[[1;31mERROR[m] 
+[[1;31mERROR[m] For more information about the errors and possible solutions, please read the following articles:
+[[1;31mERROR[m] [1m[Help 1][m http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
