@@ -1,20 +1,32 @@
-cat > README.md <<'EOF'
 # Software Packaging in Popular Frameworks
 
 ## Project Overview
 
-This project demonstrates software packaging, dependency management,
-semantic versioning, environment-specific configuration, distributable
-artifacts, staging verification, and dependency security auditing across
-three popular software ecosystems:
+This project demonstrates software packaging, dependency management, semantic versioning, environment-specific configuration, distributable artifacts, staging verification, and dependency security auditing across three popular software ecosystems:
 
-- Node.js with npm and Express
-- Python with Django
-- Java with Maven
+* Node.js with npm and Express
+* Python with Django
+* Java with Maven
 
-The goal is to demonstrate how applications can be packaged into
-reproducible and distributable artifacts and then verified in clean
-staging environments.
+The goal is to demonstrate how applications can be packaged into reproducible and distributable artifacts, installed or executed in clean staging environments, and verified independently of the original development environment.
+
+---
+
+## Project Objectives
+
+This project demonstrates the following software packaging and DevOps practices:
+
+* Dependency management
+* Dependency version pinning
+* Semantic versioning
+* Application packaging
+* Distributable artifact generation
+* Environment-specific configuration
+* Clean staging environment verification
+* Dependency security auditing
+* Artifact and audit report management
+
+---
 
 ## Project Structure
 
@@ -34,328 +46,424 @@ software-packaging-project/
 ├── python-app/
 ├── screenshots/
 └── README.md
+```
 
-## 1. Node.js Packaging
+---
+
+# 1. Node.js Packaging
+
 ## Framework and Dependency Management
-The Node.js application uses Express as its web framework.
 
-Dependencies are defined in package.json:
+The Node.js application uses Express as its web framework and npm for dependency management.
 
-"dependencies": {
-  "express": "^5.2.1"
-}
+Application dependencies are defined in `node-app/package.json`.
 
-The dependency lock file is:
+The Express dependency is specified as:
 
-node-app/package-lock.json
+`express: ^5.2.1`
+
+The dependency lock file is `node-app/package-lock.json`.
+
+The lock file ensures that the required dependency versions can be reproduced consistently during installation.
 
 ## Install Dependencies
 
-cd node-app
-npm install
+From the Node.js application directory, dependencies can be installed using:
+
+`npm install`
 
 ## Run the Application
 
-npm start
+The application can be started using:
 
-The application supports environment-specific configuration using
-environment variables:
+`npm start`
 
-NODE_ENV=staging PORT=3001 node index.js
+The application supports environment-specific configuration through environment variables.
+
+For example, a staging environment can be configured using:
+
+`NODE_ENV=staging PORT=3001 node index.js`
+
+This allows the runtime environment and port to be changed without modifying the application source code.
 
 ## Create the Package
 
-npm pack
+The Node.js application is packaged using the npm packaging command:
 
-Generated package:
+`npm pack`
 
-software-packaging-node-app-1.0.0.tgz
+The generated package is:
 
-The package was installed into a clean staging directory and verified
-successfully.
+`software-packaging-node-app-1.0.0.tgz`
+
+The package was copied to the project's `artifacts/` directory.
 
 ## Staging Verification
 
-npm install ../artifacts/software-packaging-node-app-1.0.0.tgz
-NODE_ENV=staging PORT=3001 node node_modules/software-packaging-node-app/index.js
+The generated package was installed into a clean staging directory using:
 
-The application responded successfully on port 3001 and reported the
-staging environment.
+`npm install ../artifacts/software-packaging-node-app-1.0.0.tgz`
+
+The packaged application was then started using:
+
+`NODE_ENV=staging PORT=3001 node node_modules/software-packaging-node-app/index.js`
+
+The application responded successfully on port `3001` and reported the staging environment.
+
+This verified that the generated package could be installed and executed independently of the original development environment.
 
 ## Security Audit
 
-npm audit
+The Node.js dependencies were audited using:
 
-Result:
+`npm audit`
 
-found 0 vulnerabilities
+The audit reported:
 
-Audit output was saved to:
+`found 0 vulnerabilities`
 
-artifacts/node-audit.json
+The audit output was saved to `artifacts/node-audit.json`.
 
-## 2. Python/Django Packaging
-# Framework and Dependency Management
+---
 
-The Python application uses Django.
+# 2. Python/Django Packaging
 
-Dependencies are pinned in:
+## Framework and Dependency Management
 
-python-app/requirements.txt
+The Python application uses Django as its web framework.
 
-Example:
+Python dependencies are pinned in `python-app/requirements.txt`.
 
-Django==6.1.1
-asgiref==3.12.1
-sqlparse==0.6.0
+The project dependencies include:
 
-The project also defines package metadata and dependencies in:
+* Django `6.1.1`
+* asgiref `3.12.1`
+* sqlparse `0.6.0`
 
-python-app/pyproject.toml
+The project also defines package metadata and dependencies in `python-app/pyproject.toml`.
 
 ## Install Dependencies
 
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+A Python virtual environment is used to isolate the application's dependencies.
 
-## Run Development Application
+The environment can be created using:
 
-python manage.py runserver
+`python3 -m venv .venv`
+
+After creating the virtual environment, it can be activated using:
+
+`source .venv/bin/activate`
+
+Dependencies can then be installed using:
+
+`pip install -r requirements.txt`
+
+## Run the Development Application
+
+The Django development application can be started using:
+
+`python manage.py runserver`
 
 ## Build Distributable Packages
 
-python -m build
+The Python application was packaged using Python Build:
 
-This generated:
+`python -m build`
 
-software_packaging_django_app-1.0.0-py3-none-any.whl
-software_packaging_django_app-1.0.0.tar.gz
+The build process generated the following packages:
 
-The generated packages were copied to:
+* `software_packaging_django_app-1.0.0-py3-none-any.whl`
+* `software_packaging_django_app-1.0.0.tar.gz`
 
-artifacts/
+The generated packages were copied to the project's `artifacts/` directory.
 
 ## Staging Verification
 
-A clean staging virtual environment was created and the wheel package
-was installed:
+A clean staging virtual environment was created and the generated wheel package was installed using:
 
-pip install artifacts/software_packaging_django_app-1.0.0-py3-none-any.whl
+`pip install artifacts/software_packaging_django_app-1.0.0-py3-none-any.whl`
 
-The packaged application was then started on port 8001:
+The packaged application was then started on port `8001` using:
 
-DJANGO_SETTINGS_MODULE=config.settings django-admin runserver 127.0.0.1:8001
+`DJANGO_SETTINGS_MODULE=config.settings django-admin runserver 127.0.0.1:8001`
 
 The application responded successfully and displayed:
 
-Django application is running successfully.
-Framework: Django
-Version: 1.0.0
+**Django application is running successfully.**
+
+**Framework:** Django
+
+**Version:** 1.0.0
+
+This confirmed that the packaged Django application could be installed and executed successfully in a separate staging environment.
 
 ## Security Audit
 
-pip-audit
+The Python dependencies were audited using:
 
-Result:
+`pip-audit`
 
-No known vulnerabilities found
+The audit reported:
+
+**No known vulnerabilities found**
 
 The audit report was saved to:
 
-artifacts/python-audit.json
+`artifacts/python-audit.json`
 
-The local project package itself was skipped by pip-audit because it is
-not published on PyPI. The audit result therefore applies to the
-auditable installed dependencies.
+The local project package itself was skipped by `pip-audit` because it is not published on PyPI.
 
-## 3. Java/Maven Packaging
+Therefore, the audit result applies to the auditable installed dependencies.
 
-# Framework and Dependency Management
+---
 
-The Java application uses Maven for build and dependency management.
+# 3. Java/Maven Packaging
+
+## Build and Dependency Management
+
+The Java application uses Maven for project management, dependency management, and packaging.
 
 Project metadata and build configuration are defined in:
 
-java-app/pom.xml
+`java-app/pom.xml`
 
 The application version is:
 
-1.0.0
+`1.0.0`
 
 ## Build the Application
 
-mvn clean package
+The Java application was built using:
+
+`mvn clean package`
 
 Maven successfully generated:
 
-target/software-packaging-java-app-1.0.0.jar
+`target/software-packaging-java-app-1.0.0.jar`
 
 ## Run the Packaged JAR
 
-java -jar target/software-packaging-java-app-1.0.0.jar
+The packaged application can be executed using:
 
-Output:
+`java -jar target/software-packaging-java-app-1.0.0.jar`
 
-Software Packaging Project
-Java application is running successfully.
-Framework: Maven
-Version: 1.0.0
+The application produced the following output:
+
+**Software Packaging Project**
+
+**Java application is running successfully.**
+
+**Framework:** Maven
+
+**Version:** 1.0.0
 
 ## Staging Verification
 
-The generated JAR was copied into a clean staging directory and
-executed independently:
+The generated JAR was copied into a clean staging directory and executed independently using:
 
-java -jar software-packaging-java-app-1.0.0.jar
+`java -jar software-packaging-java-app-1.0.0.jar`
 
 The packaged application ran successfully.
 
+This confirmed that the generated JAR could be executed independently from the original Maven build directory.
+
 ## Dependency Tree
 
-The Maven dependency tree was saved to:
+The Maven dependency tree was generated and saved to:
 
-artifacts/java-dependency-tree.txt
+`artifacts/java-dependency-tree.txt`
 
-The application does not contain application-level external
-dependencies.
+The application does not contain application-level external dependencies.
 
 ## Security Audit
 
-OWASP Dependency-Check was attempted with:
+OWASP Dependency-Check was attempted using:
 
-mvn org.owasp:dependency-check-maven:check
+`mvn org.owasp:dependency-check-maven:check`
 
-The scan was inconclusive because the NVD database update required a
-valid NVD API key.
+The scan was inconclusive because the NVD database update required a valid NVD API key.
 
 The resulting log was saved to:
 
-artifacts/java-security-audit.txt
+`artifacts/java-security-audit.txt`
 
-Therefore, the Java application should not be described as
-vulnerability-free based on this scan.
+The Java application should therefore not be described as vulnerability-free based on this scan.
 
-## 4. Semantic Versioning
+---
 
-All three applications use semantic versioning:
+# 4. Semantic Versioning
 
-MAJOR.MINOR.PATCH
+All three applications use Semantic Versioning (SemVer):
 
-Current project versions:
+`MAJOR.MINOR.PATCH`
 
-Node.js: 1.0.0
-Python/Django: 1.0.0
-Java/Maven: 1.0.0
+## Current Project Versions
 
-Semantic versioning allows package consumers and build systems to
-understand the significance of application changes.
+| Application   | Version |
+| ------------- | ------- |
+| Node.js       | `1.0.0` |
+| Python/Django | `1.0.0` |
+| Java/Maven    | `1.0.0` |
 
-MAJOR - incompatible API or breaking changes
-MINOR - backward-compatible functionality
-PATCH - backward-compatible bug fixes
+## Version Components
 
-## 5. Environment-Specific Configuration
+| Component | Meaning                           |
+| --------- | --------------------------------- |
+| MAJOR     | Incompatible or breaking changes  |
+| MINOR     | Backward-compatible functionality |
+| PATCH     | Backward-compatible bug fixes     |
 
-The applications demonstrate separation between application code and
-environment-specific runtime configuration.
+Semantic versioning allows package consumers and build systems to understand the significance of application changes.
+
+---
+
+# 5. Environment-Specific Configuration
+
+The applications demonstrate separation between application code and environment-specific runtime configuration.
 
 ## Node.js
 
 The Node.js application uses environment variables:
 
-NODE_ENV=staging
-PORT=3001
+`NODE_ENV=staging`
 
-The packaged application was verified in a staging environment without
-changing the application source code.
+`PORT=3001`
+
+The packaged application was verified in a staging environment without modifying the application source code.
 
 ## Python/Django
 
-The Django application was installed into a separate staging virtual
-environment and executed on a different port:
+The Django application was installed into a separate staging virtual environment and executed on:
 
-127.0.0.1:8001
+`127.0.0.1:8001`
 
-# Java
+This demonstrates the ability to install and execute the packaged application independently from the original development environment.
 
-The Java JAR was copied to a separate staging directory and executed
-independently from the Maven build directory.
+## Java
 
+The Java JAR was copied to a separate staging directory and executed independently from the Maven build directory.
 
-| Ecosystem | Tool                   | Result                                                      |
+---
+
+# 6. Security Audit Summary
+
+| Ecosystem | Security Tool          | Result                                                      |
 | --------- | ---------------------- | ----------------------------------------------------------- |
 | Node.js   | npm audit              | 0 vulnerabilities found                                     |
 | Python    | pip-audit              | No known vulnerabilities found for auditable dependencies   |
 | Java      | OWASP Dependency-Check | Inconclusive due to NVD API key/database update requirement |
 
+The security audit reports are stored in the `artifacts/` directory.
 
-Security audit reports are stored in:
+---
 
-artifacts/
+# 7. Generated Artifacts
 
-## 7. Generated Artifacts
+The project produces the following distributable artifacts.
 
-The project produces the following distributable artifacts:
+## Node.js
 
-# Node.js
+`artifacts/software-packaging-node-app-1.0.0.tgz`
 
-artifacts/software-packaging-node-app-1.0.0.tgz
+## Python/Django
 
-Python/Django
+`artifacts/software_packaging_django_app-1.0.0-py3-none-any.whl`
 
-artifacts/software_packaging_django_app-1.0.0-py3-none-any.whl
-artifacts/software_packaging_django_app-1.0.0.tar.gz
-
+`artifacts/software_packaging_django_app-1.0.0.tar.gz`
 
 ## Java/Maven
 
-artifacts/software-packaging-java-app-1.0.0.jar
+`artifacts/software-packaging-java-app-1.0.0.jar`
 
-Supporting dependency and security reports are also stored in the
-artifacts/ directory.
+Supporting dependency and security reports are also stored in the `artifacts/` directory.
 
-## 8. Verification Summary
+---
 
-Each packaged application was verified after packaging.
+# 8. Verification Summary
 
-| Application     | Package Format    | Staging Verification | Security Audit                                            |
-| --------------- | ----------------- | -------------------- | --------------------------------------------------------- |
-| Node.js/Express | `.tgz`            | Successful           | 0 vulnerabilities                                         |
-| Python/Django   | `.whl`, `.tar.gz` | Successful           | No known vulnerabilities found for auditable dependencies |
-| Java/Maven      | `.jar`            | Successful           | Inconclusive                                              |
+Each packaged application was independently verified after packaging.
 
+| Application       | Package Format    | Staging Verification | Security Audit                                      |
+| ----------------- | ----------------- | -------------------- | --------------------------------------------------- |
+| Node.js / Express | `.tgz`            | Successful           | 0 vulnerabilities                                   |
+| Python / Django   | `.whl`, `.tar.gz` | Successful           | No known vulnerabilities for auditable dependencies |
+| Java / Maven      | `.jar`            | Successful           | Inconclusive                                        |
 
-The staging tests demonstrate that the generated artifacts can be
-installed or executed independently of the original development
-environment.
+The staging tests demonstrate that the generated artifacts can be installed or executed independently of the original development environment.
 
-## 9. Tools Used
- 1. Node.js
- 2. npm
- 3. Express
- 4. Python
- 5. Django
- 6. pip
- 7. pip-audit
- 8. setuptools
- 9. Python Build
-10. Java
-11. Maven
-12. OWASP Dependency-Check
-13. Git
-14. Linux/Ubuntu
+---
 
-## Conclusion
+# 9. Tools Used
 
-This project demonstrates the complete software packaging workflow:
+| Category         | Tools                           |
+| ---------------- | ------------------------------- |
+| JavaScript       | Node.js, npm, Express           |
+| Python           | Python, Django, pip, setuptools |
+| Python Packaging | Python Build                    |
+| Python Security  | pip-audit                       |
+| Java             | Java, Maven                     |
+| Java Security    | OWASP Dependency-Check          |
+| Version Control  | Git                             |
+| Operating System | Linux / Ubuntu                  |
 
-1. Define dependencies.
-2. Pin and manage dependency versions.
-3. Apply semantic versioning.
-4. Build distributable artifacts.
-5. Separate runtime environment configuration.
-6. Install or execute packages in clean staging environments.
-7. Verify packaged applications.
-8. Perform dependency security audits.
-9. Store generated artifacts and audit reports for submission.
+---
+
+# 10. Project Workflow
+
+The overall software packaging workflow is:
+
+**Source Code**
+
+↓
+
+**Dependency Management**
+
+↓
+
+**Semantic Versioning**
+
+↓
+
+**Package / Build**
+
+↓
+
+**Distributable Artifact**
+
+↓
+
+**Clean Staging Environment**
+
+↓
+
+**Installation / Execution**
+
+↓
+
+**Application Verification**
+
+↓
+
+**Security Audit**
+
+This workflow demonstrates a practical approach to packaging and validating applications before they are distributed or deployed.
+
+---
+
+# Conclusion
+
+This project demonstrates a complete software packaging workflow across Node.js, Python/Django, and Java/Maven.
+
+The project covers:
+
+1. Dependency definition and management
+2. Dependency version pinning
+3. Semantic versioning
+4. Distributable package creation
+5. Environment-specific configuration
+6. Clean staging installation and execution
+7. Artifact verification
+8. Dependency security auditing
+
+The resulting artifacts and supporting audit reports provide evidence that the applications were packaged, tested, and evaluated as part of a reproducible software delivery workflow.
+
