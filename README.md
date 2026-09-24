@@ -33,6 +33,7 @@ This project demonstrates the following software packaging and DevOps practices:
 ```text
 software-packaging-project/
 ├── artifacts/
+│   ├── checksums.sha256
 │   ├── java-dependency-tree.txt
 │   ├── java-security-audit.txt
 │   ├── node-audit.json
@@ -44,12 +45,16 @@ software-packaging-project/
 ├── java-app/
 ├── node-app/
 ├── python-app/
+├── scripts/
+│   └── validate_artifacts.sh
 ├── screenshots/
+├── docs/
+│   └── RELEASE_NOTES_v1.0.0.md
+├── CHANGELOG.md
 └── README.md
 ```
 
 ---
-
 # 1. Node.js Packaging
 
 ## Framework and Dependency Management
@@ -164,13 +169,19 @@ The Django development application can be started using:
 
 `python manage.py runserver`
 
-## Build Distributable Packages
+## Build Configuration and Distributable Packages
 
-The Python application was packaged using Python Build:
+The Python application uses `pyproject.toml` for modern Python packaging configuration and includes `setup.py` for build configuration compatibility.
+
+Python packages can be built using:
 
 `python -m build`
 
-The build process generated the following packages:
+The project also supports building with:
+
+`python setup.py sdist bdist_wheel`
+
+The build process generates the following packages:
 
 * `software_packaging_django_app-1.0.0-py3-none-any.whl`
 * `software_packaging_django_app-1.0.0.tar.gz`
@@ -315,6 +326,18 @@ All three applications use Semantic Versioning (SemVer):
 
 Semantic versioning allows package consumers and build systems to understand the significance of application changes.
 
+## Release Documentation
+
+Version `1.0.0` is documented in:
+
+`CHANGELOG.md`
+
+Release-specific information is documented in:
+
+`docs/RELEASE_NOTES_v1.0.0.md`
+
+The changelog records project changes by version, while the release notes describe the contents and validation status of the `1.0.0` release.
+
 ---
 
 # 5. Environment-Specific Configuration
@@ -378,8 +401,56 @@ The project produces the following distributable artifacts.
 Supporting dependency and security reports are also stored in the `artifacts/` directory.
 
 ---
+# 8. Artifact Integrity Verification
 
-# 8. Verification Summary
+SHA-256 checksums are generated for all primary distributable artifacts to provide integrity  verification.
+
+The checksum file is:
+
+`artifacts/checksums.sha256`
+
+Checksums are generated using:
+
+`sha256sum artifacts/software-packaging-node-app-1.0.0.tgz artifacts/software_packaging_django_app-1.0.0-py3-none-any.whl artifacts/software_packaging_django_app-1.0.0.tar.gz artifacts/software-packaging-java-app-1.0.0.jar > artifacts/checksums.sha256`
+
+Artifact integrity is verified using:
+
+`sha256sum -c artifacts/checksums.sha256`
+
+All four artifacts successfully returned:
+
+`OK`
+
+This confirms that the packaged artifacts match the recorded SHA-256 checksums at the time of verification.
+
+---
+
+# 9. Testing and Validation
+
+The project includes an automated artifact validation script:
+
+`scripts/validate_artifacts.sh`
+
+The validation script checks:
+
+* Required artifacts exist
+* SHA-256 checksums match
+* Node.js package archive is valid
+* Python wheel archive is valid
+* Python source distribution is valid
+* Java JAR archive is valid
+
+The validation process is executed using:
+
+`./scripts/validate_artifacts.sh`
+
+The validation completed successfully for all packaged artifacts.
+
+This provides a repeatable validation process for confirming artifact availability, integrity, and archive validity before distribution.
+
+---
+
+# 10. Verification Summary
 
 Each packaged application was independently verified after packaging.
 
@@ -393,22 +464,22 @@ The staging tests demonstrate that the generated artifacts can be installed or e
 
 ---
 
-# 9. Tools Used
+# 11. Tools Used
 
-| Category         | Tools                           |
-| ---------------- | ------------------------------- |
-| JavaScript       | Node.js, npm, Express           |
-| Python           | Python, Django, pip, setuptools |
-| Python Packaging | Python Build                    |
-| Python Security  | pip-audit                       |
-| Java             | Java, Maven                     |
-| Java Security    | OWASP Dependency-Check          |
-| Version Control  | Git                             |
-| Operating System | Linux / Ubuntu                  |
+| Category         | Tools                              |
+| ---------------- | ---------------------------------- |
+| JavaScript       | Node.js, npm, Express              |
+| Python           | Python, Django, pip, setuptools    |
+| Python Packaging | Python Build, setuptools, setup.py |
+| Python Security  | pip-audit                          |
+| Java             | Java, Maven                        |
+| Java Security    | OWASP Dependency-Check             |
+| Version Control  | Git                                |
+| Operating System | Linux / Ubuntu                     |
 
 ---
 
-# 10. Project Workflow
+# 12. Project Workflow
 
 The overall software packaging workflow is:
 
